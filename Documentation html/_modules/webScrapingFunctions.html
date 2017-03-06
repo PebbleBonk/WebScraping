@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>webScrapingFunctions &mdash; WebScrapingTryOut 0.0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="WebScrapingTryOut 0.0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> WebScrapingTryOut
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../helpfuncs.html">Helper Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mainfuncs.html">Main functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">WebScrapingTryOut</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>webScrapingFunctions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for webScrapingFunctions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Created on 4.2.2016</span>
+
+<span class="sd">@author: t_ollrii</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="sd">&#39;&#39;&#39; Functions for scraping information off Wikipedia</span>
+<span class="sd">    ************************************************</span>
+<span class="sd">    These functions were made to scrape information </span>
+<span class="sd">    off wikipedia to ease the workflow of bigger</span>
+<span class="sd">    excels. First function searches the html-code</span>
+<span class="sd">    of the wanted page for tags and information</span>
+<span class="sd">    under them, whereas the second one searches </span>
+<span class="sd">    for wanted keywords from the whole page.</span>
+<span class="sd">    </span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">&#39;&#39;&#39; ===================== Information from html webpage =================== &#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="searchForCompanyInfo"><a class="viewcode-back" href="../helpfuncs.html#webScrapingFunctions.searchForCompanyInfo">[docs]</a><span class="k">def</span> <span class="nf">searchForCompanyInfo</span><span class="p">(</span><span class="n">soup</span><span class="p">,</span> <span class="n">wantedInfo</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    This function searches for information given in parameter</span>
+<span class="sd">    &#39;wantedInfo&#39; from the webpage, given as a BeautifulSoup object</span>
+<span class="sd">    in parameter &#39;soup&#39;. Function uses regular expressions to extract</span>
+<span class="sd">    the data from the html code for maximum efficiency &amp; precision.</span>
+<span class="sd">    </span>
+<span class="sd">    .. note::</span>
+<span class="sd">        It would be interesting to put some timers within this module</span>
+<span class="sd">        to find out how much different parts of the code differ in</span>
+<span class="sd">        their respective runtimes...</span>
+<span class="sd">        </span>
+<span class="sd">    :param  soup: The html parsed webpage where the information is</span>
+<span class="sd">            searched from.</span>
+<span class="sd">    :type   soup: :mod:`BeautifulSoup4` object</span>
+<span class="sd">    :param  wantedInfo: A list of strings that the function will try</span>
+<span class="sd">            to find from the given soup.</span>
+<span class="sd">    :type   wantedInfo: list of str</span>
+
+<span class="sd">    :returns: A list of strings, found under the html tag(s) given</span>
+<span class="sd">            in parameter &#39;wantedInfo&#39;</span>
+<span class="sd">            </span>
+<span class="sd">    .. todo:: Errors:  Raising errors on different occasions. E.g. empty </span>
+<span class="sd">            lists, undefined character etc.</span>
+<span class="sd">    .. todo:: Encoding:  Handle site encoding better. At the moment there </span>
+<span class="sd">            are some difficulties with special characters, such as &quot;&amp;&quot;.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">infoData</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">resultData</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">infoStr</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">wantedInfo</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;&gt;[^&lt;&gt;].[^&lt;&gt;]*&lt;&#39;</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="p">))</span>
+        
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">wantedInfo</span><span class="p">:</span>
+                <span class="n">infoStr</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">infoStr</span><span class="p">,</span> <span class="n">x</span><span class="p">])</span>
+        <span class="n">infoData</span> <span class="o">=</span> <span class="n">infoStr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">infoData</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;amp;&quot;</span><span class="p">,</span> <span class="s2">&quot;&amp;&quot;</span><span class="p">)</span>\
+             <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="ow">and</span> <span class="n">i</span><span class="o">!=</span><span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">resultData</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">resultData</span></div>
+
+
+<span class="sd">&#39;&#39;&#39; ========================= KeyWords from html webpage ===================&#39;&#39;&#39;</span>
+<div class="viewcode-block" id="searchForKeyWords"><a class="viewcode-back" href="../helpfuncs.html#webScrapingFunctions.searchForKeyWords">[docs]</a><span class="k">def</span> <span class="nf">searchForKeyWords</span><span class="p">(</span><span class="n">soup</span><span class="p">,</span> <span class="n">keyWordList</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; This function searches for keywords given in parameter</span>
+<span class="sd">    &#39;keyWordList&#39; from the webpage, given as a BeautifulSoup object</span>
+<span class="sd">    in parameter &#39;soup&#39;. Function uses regular expressions to find</span>
+<span class="sd">    the words from the html code for maximum efficiency &amp; precision.</span>
+<span class="sd">    </span>
+<span class="sd">    .. note::</span>
+<span class="sd">        Keywords should be written in their **depricated** form</span>
+<span class="sd">        as then also their conjugated forms will be found.</span>
+<span class="sd">        </span>
+<span class="sd">    :param  soup: The html parsed webpage where the information is</span>
+<span class="sd">            searched from.</span>
+<span class="sd">    :type   soup: BeautifulSoup4 object</span>
+<span class="sd">    :param  keyWordList: A list of strings that the function will</span>
+<span class="sd">            look for in the page given in parameter &#39;soup&#39;</span>
+<span class="sd">    :type   keyWordList: A list of str</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: The list of found key words that were found from the</span>
+<span class="sd">            document as a list of strings.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">foundKeyWords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">kWord</span> <span class="ow">in</span> <span class="n">keyWordList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">kWord</span><span class="p">))</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">foundKeyWords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kWord</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">foundKeyWords</span></div>
+
+
+
+
+
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Olli Riikonen.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Main functions &mdash; WebScrapingTryOut 0.0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="WebScrapingTryOut 0.0.1 documentation" href="index.html"/>
+        <link rel="prev" title="Helper Functions" href="helpfuncs.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> WebScrapingTryOut
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="helpfuncs.html">Helper Functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Main functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#extracting-the-company-info">Extracting the company Info</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#name-main">__name__==&#8221;__main__&#8221;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WebScrapingTryOut</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Main functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/mainfuncs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="main-functions">
+<h1>Main functions<a class="headerlink" href="#main-functions" title="Permalink to this headline">¶</a></h1>
+<p>The more spesific part of the project, concentrating only on getting the information of the companies provided in a .csv file from Wikipedia. Utilizes the <a class="reference internal" href="helpfuncs.html#webScrapingFunctions.searchForCompanyInfo" title="webScrapingFunctions.searchForCompanyInfo"><code class="xref py py-func docutils literal"><span class="pre">webScrapingFunctions.searchForCompanyInfo()</span></code></a> and <code class="xref py py-func docutils literal"><span class="pre">webScrapingFunctions.searchForkeyWords()</span></code> functions introduced in the <em>Helper Functions</em> partition.</p>
+<div class="section" id="extracting-the-company-info">
+<h2>Extracting the company Info<a class="headerlink" href="#extracting-the-company-info" title="Permalink to this headline">¶</a></h2>
+<p>This module keeps track on the progress and handles the file IO. Moreover, it provides some of the error handling. The main part found also in this module is not documented yet.</p>
+<span class="target" id="module-main"></span><p>Created on 4.2.2016
+&#64;author: t_ollrii</p>
+<dl class="function">
+<dt id="main.companyInfoFromCSV">
+<code class="descclassname">main.</code><code class="descname">companyInfoFromCSV</code><span class="sig-paren">(</span><em>companyListFile</em>, <em>keyWordList</em>, <em>infoList</em>, <em>saveName=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#companyInfoFromCSV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#main.companyInfoFromCSV" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function for scraping information off wikipedia pages.
+Made for checking information about different companies 
+but should be easily transformed to check other kind of
+information as well. Saves the information in .csv file
+using unicode-32 encoding.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Microsoft Excel doesn&#8217;t recognize the utf-32 encoding
+in the same way it recognizes, for example, utf-8 or ANSI
+encoded .csv files. Thus the .csv file has to be imported
+manually to excel through Data -&gt; Import -&gt; From text</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>companyListFile</strong> &#8211; a path to a .csv -file that contains the list
+of companies the function goes through and finds information about.</li>
+<li><strong>keyWordList</strong> &#8211; Key Word List. A _list_ of containing the keywords as
+_strings_ that the function &#8216;searchForKeyWords()&#8217; will look for.</li>
+<li><strong>infoList</strong> &#8211; Company Information List. A _list_ containing the kinds of
+information, e.g. &#8220;industry&#8221; or &#8220;Services&#8221; as _strings_ that the
+function &#8216;searchForCompanyInfo()&#8217; will look for.</li>
+<li><strong>saveName</strong> &#8211; The name of the file where the results will be saved
+and the path to the file as a &#64;string. If parameter is omitted,
+the path of companyListFile is used instead. Name of the save
+will be the name of the companyListFile appended with &#8220;_results&#8221;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Change naming so that the function works for
+scraping all kinds of information from Wikipedia.</p>
+</div>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">Define a return value showing how well the 
+values given were found, how long it took etc....</p>
+</div>
+<div class="admonition-todo admonition" id="index-2">
+<p class="first admonition-title">Todo</p>
+<p class="last">Implement a log file for errors, warnings
+and random statistics for later inspection.</p>
+</div>
+<div class="admonition-todo admonition" id="index-3">
+<p class="first admonition-title">Todo</p>
+<p class="last">Figure out how to save the information with
+proper text encoding. The current one doesn&#8217;t work with
+excel automatically but has to be encoded again using
+for example Notepad. (save as -&gt; encoding: Unicode/ANSI)</p>
+</div>
+<div class="admonition-todo admonition" id="index-4">
+<p class="first admonition-title">Todo</p>
+<p class="last">Add a number utilizing the matchingAlgortihm() to value
+how well the found wikipedia page matches with the 
+original one. This to ease the process of going through 
+the excel sheet.</p>
+</div>
+</dd></dl>
+
+<div class="section" id="name-main">
+<h3>__name__==&#8221;__main__&#8221;<a class="headerlink" href="#name-main" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Withholds all the names as strings those of the files that have the names of the companies.</li>
+<li>Prints information about staring and finishing the progress and handles some of the warnings that might be generated through the run of the program.</li>
+<li>Prints out information of the run time of the code on each file.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="helpfuncs.html" class="btn btn-neutral" title="Helper Functions" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Olli Riikonen.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

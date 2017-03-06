@@ -1,0 +1,18 @@
+Main functions
+**************
+
+The more spesific part of the project, concentrating only on getting the information of the companies provided in a .csv file from Wikipedia. Utilizes the :func:`webScrapingFunctions.searchForCompanyInfo` and :func:`webScrapingFunctions.searchForkeyWords` functions introduced in the *Helper Functions* partition.
+
+Extracting the company Info
+===========================
+
+This module keeps track on the progress and handles the file IO. Moreover, it provides some of the error handling. The main part found also in this module is not documented yet.
+
+.. automodule:: main
+	:members: companyInfoFromCSV
+
+__name__=="__main__"
+--------------------
+- Withholds all the names as strings those of the files that have the names of the companies.
+- Prints information about staring and finishing the progress and handles some of the warnings that might be generated through the run of the program. 
+- Prints out information of the run time of the code on each file.

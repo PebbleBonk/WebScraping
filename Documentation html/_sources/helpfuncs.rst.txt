@@ -1,0 +1,41 @@
+Helper Functions
+****************
+
+The more abstract functions of this project tat can also be used for other purposes.
+
+
+Web scraping functions
+======================
+
+Introduction
+------------
+Functions for scraping information off Wikipedia off wikipedia to ease the workflow of bigger excels. First function searches the html-code of the wanted page for tags and information under them, whereas the second one searches for wanted keywords from the whole page.
+
+One needs to note that I am especially proud of the following code as it required me to finally go and learn the Regular expressions properly::
+
+	for i in soup.find_all(text=wantedInfo):
+        	p = re.compile('>[^<>].[^<>]*<')
+        	r = p.findall(str(i.parent.parent))
+
+This can be found from the :func:`webScrapingFunctions.searchForCompanyInfo` function.
+
+Functions
+---------
+
+.. automodule:: webScrapingFunctions
+	:members: searchForCompanyInfo, searchForKeyWords
+
+Progress Bar
+============
+
+Introduction
+------------
+
+Just a simple progress bar to track the progress and to give a estimated time of finishing.
+(simpleProgressBar.py)
+
+Functions
+---------
+
+.. automodule:: simpleProgressBar
+	:members: progressBar

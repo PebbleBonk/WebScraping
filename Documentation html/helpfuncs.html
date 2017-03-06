@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Helper Functions &mdash; WebScrapingTryOut 0.0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="WebScrapingTryOut 0.0.1 documentation" href="index.html"/>
+        <link rel="next" title="Main functions" href="mainfuncs.html"/>
+        <link rel="prev" title="Documentation for the Web Scraping Python project" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> WebScrapingTryOut
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Helper Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#web-scraping-functions">Web scraping functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-webScrapingFunctions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#progress-bar">Progress Bar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mainfuncs.html">Main functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WebScrapingTryOut</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Helper Functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/helpfuncs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="helper-functions">
+<h1>Helper Functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">¶</a></h1>
+<p>The more abstract functions of this project tat can also be used for other purposes.</p>
+<div class="section" id="web-scraping-functions">
+<h2>Web scraping functions<a class="headerlink" href="#web-scraping-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="introduction">
+<h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
+<p>Functions for scraping information off Wikipedia off wikipedia to ease the workflow of bigger excels. First function searches the html-code of the wanted page for tags and information under them, whereas the second one searches for wanted keywords from the whole page.</p>
+<p>One needs to note that I am especially proud of the following code as it required me to finally go and learn the Regular expressions properly:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">wantedInfo</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;&gt;[^&lt;&gt;].[^&lt;&gt;]*&lt;&#39;</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This can be found from the <a class="reference internal" href="#webScrapingFunctions.searchForCompanyInfo" title="webScrapingFunctions.searchForCompanyInfo"><code class="xref py py-func docutils literal"><span class="pre">webScrapingFunctions.searchForCompanyInfo()</span></code></a> function.</p>
+</div>
+<div class="section" id="module-webScrapingFunctions">
+<span id="functions"></span><h3>Functions<a class="headerlink" href="#module-webScrapingFunctions" title="Permalink to this headline">¶</a></h3>
+<p>Created on 4.2.2016</p>
+<p>&#64;author: t_ollrii</p>
+<dl class="function">
+<dt id="webScrapingFunctions.searchForCompanyInfo">
+<code class="descclassname">webScrapingFunctions.</code><code class="descname">searchForCompanyInfo</code><span class="sig-paren">(</span><em>soup</em>, <em>wantedInfo</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/webScrapingFunctions.html#searchForCompanyInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#webScrapingFunctions.searchForCompanyInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function searches for information given in parameter
+&#8216;wantedInfo&#8217; from the webpage, given as a BeautifulSoup object
+in parameter &#8216;soup&#8217;. Function uses regular expressions to extract
+the data from the html code for maximum efficiency &amp; precision.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It would be interesting to put some timers within this module
+to find out how much different parts of the code differ in
+their respective runtimes...</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>soup</strong> (<code class="xref py py-mod docutils literal"><span class="pre">BeautifulSoup4</span></code> object) &#8211; The html parsed webpage where the information is
+searched from.</li>
+<li><strong>wantedInfo</strong> (<em>list of str</em>) &#8211; A list of strings that the function will try
+to find from the given soup.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of strings, found under the html tag(s) given
+in parameter &#8216;wantedInfo&#8217;</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Errors:  Raising errors on different occasions. E.g. empty 
+lists, undefined character etc.</p>
+</div>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">Encoding:  Handle site encoding better. At the moment there 
+are some difficulties with special characters, such as &#8220;&amp;&#8221;.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="webScrapingFunctions.searchForKeyWords">
+<code class="descclassname">webScrapingFunctions.</code><code class="descname">searchForKeyWords</code><span class="sig-paren">(</span><em>soup</em>, <em>keyWordList</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/webScrapingFunctions.html#searchForKeyWords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#webScrapingFunctions.searchForKeyWords" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function searches for keywords given in parameter
+&#8216;keyWordList&#8217; from the webpage, given as a BeautifulSoup object
+in parameter &#8216;soup&#8217;. Function uses regular expressions to find
+the words from the html code for maximum efficiency &amp; precision.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Keywords should be written in their <strong>depricated</strong> form
+as then also their conjugated forms will be found.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>soup</strong> (<em>BeautifulSoup4 object</em>) &#8211; The html parsed webpage where the information is
+searched from.</li>
+<li><strong>keyWordList</strong> (<em>A list of str</em>) &#8211; A list of strings that the function will
+look for in the page given in parameter &#8216;soup&#8217;</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The list of found key words that were found from the
+document as a list of strings.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="progress-bar">
+<h2>Progress Bar<a class="headerlink" href="#progress-bar" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Introduction<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Just a simple progress bar to track the progress and to give a estimated time of finishing.
+(simpleProgressBar.py)</p>
+</div>
+<div class="section" id="id2">
+<h3>Functions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-simpleProgressBar"></span><dl class="function">
+<dt id="simpleProgressBar.progressBar">
+<code class="descclassname">simpleProgressBar.</code><code class="descname">progressBar</code><span class="sig-paren">(</span><em>prgrs</em>, <em>prgrsTot</em>, <em>n=2</em>, <em>elapsedTime=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/simpleProgressBar.html#progressBar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#simpleProgressBar.progressBar" title="Permalink to this definition">¶</a></dt>
+<dd><p>A very simple progress bar fit for command line printing.
+Has an option to decide the length and detail of the bar
+as well as option to show estimated time of finishing. Also
+has a cute little ASCII spinning wheel for &#8220;extra annoyance&#8221;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>prgrs</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The value representing the current progress of
+the program the progress bar represents.</li>
+<li><strong>prgrsTot</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The value representing the end of the progress
+(100%). The parameter &#8216;prgrs&#8217; will be compared to this
+with equation <em>prgrs/prgrsTot</em> to calculate how much of 
+the progress is done.</li>
+<li><strong>n</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The divider deciding how long the progress bar will
+be on the screen. I.e. the number of characters the bar
+consists of. (Calculated by: <em>num_of_char = 100/n</em>). 
+Defaults to 2.</li>
+<li><strong>elapsedTime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Time since the program started running.
+Note that a timer should be initiated for this to be
+used. If omitted, the progress bar won&#8217;t update the
+eta/elapsed time fields.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Nothing</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mainfuncs.html" class="btn btn-neutral float-right" title="Main functions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Documentation for the Web Scraping Python project" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Olli Riikonen.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

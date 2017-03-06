@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>main &mdash; WebScrapingTryOut 0.0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="WebScrapingTryOut 0.0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> WebScrapingTryOut
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../helpfuncs.html">Helper Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mainfuncs.html">Main functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">WebScrapingTryOut</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>main</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for main</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Created on 4.2.2016</span>
+<span class="sd">@author: t_ollrii</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">localtime</span><span class="p">,</span> <span class="n">strftime</span><span class="p">,</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="nn">simpleProgressBar</span> <span class="k">import</span> <span class="n">progressBar</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="k">import</span> <span class="n">filedialog</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="k">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">path</span>
+
+<span class="kn">import</span> <span class="nn">webScrapingFunctions</span> <span class="k">as</span> <span class="nn">wsf</span>
+<span class="kn">import</span> <span class="nn">wikipedia</span> <span class="k">as</span> <span class="nn">wiki</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+
+<span class="sd">&#39;&#39;&#39; ======================= Function for saving a file =====================&#39;&#39;&#39;</span>
+<div class="viewcode-block" id="companyInfoFromCSV"><a class="viewcode-back" href="../mainfuncs.html#main.companyInfoFromCSV">[docs]</a><span class="k">def</span> <span class="nf">companyInfoFromCSV</span><span class="p">(</span><span class="n">companyListFile</span><span class="p">,</span> <span class="n">keyWordList</span><span class="p">,</span> <span class="n">infoList</span><span class="p">,</span> <span class="n">saveName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    A function for scraping information off wikipedia pages.</span>
+<span class="sd">    Made for checking information about different companies </span>
+<span class="sd">    but should be easily transformed to check other kind of</span>
+<span class="sd">    information as well. Saves the information in .csv file</span>
+<span class="sd">    using unicode-32 encoding.</span>
+<span class="sd">        </span>
+<span class="sd">    .. note::</span>
+<span class="sd">        The Microsoft Excel doesn&#39;t recognize the utf-32 encoding</span>
+<span class="sd">        in the same way it recognizes, for example, utf-8 or ANSI</span>
+<span class="sd">        encoded .csv files. Thus the .csv file has to be imported</span>
+<span class="sd">        manually to excel through Data -&gt; Import -&gt; From text</span>
+<span class="sd">    </span>
+<span class="sd">    :param  companyListFile: a path to a .csv -file that contains the list</span>
+<span class="sd">            of companies the function goes through and finds information about.</span>
+<span class="sd">    :param  keyWordList: Key Word List. A _list_ of containing the keywords as</span>
+<span class="sd">            _strings_ that the function &#39;searchForKeyWords()&#39; will look for.</span>
+<span class="sd">    :param  infoList: Company Information List. A _list_ containing the kinds of</span>
+<span class="sd">            information, e.g. &quot;industry&quot; or &quot;Services&quot; as _strings_ that the</span>
+<span class="sd">            function &#39;searchForCompanyInfo()&#39; will look for. </span>
+<span class="sd">    :param  saveName: The name of the file where the results will be saved</span>
+<span class="sd">            and the path to the file as a @string. If parameter is omitted,</span>
+<span class="sd">            the path of companyListFile is used instead. Name of the save</span>
+<span class="sd">            will be the name of the companyListFile appended with &quot;_results&quot; </span>
+
+<span class="sd">    .. todo::   Change naming so that the function works for</span>
+<span class="sd">                scraping all kinds of information from Wikipedia.</span>
+<span class="sd">    .. todo::   Define a return value showing how well the </span>
+<span class="sd">                values given were found, how long it took etc....</span>
+<span class="sd">    .. todo::   Implement a log file for errors, warnings</span>
+<span class="sd">                and random statistics for later inspection.</span>
+<span class="sd">    .. todo::   Figure out how to save the information with</span>
+<span class="sd">                proper text encoding. The current one doesn&#39;t work with</span>
+<span class="sd">                excel automatically but has to be encoded again using</span>
+<span class="sd">                for example Notepad. (save as -&gt; encoding: Unicode/ANSI)</span>
+<span class="sd">    .. todo::   Add a number utilizing the matchingAlgortihm() to value</span>
+<span class="sd">                how well the found wikipedia page matches with the </span>
+<span class="sd">                original one. This to ease the process of going through </span>
+<span class="sd">                the excel sheet.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># open the log file to write a log about the program&#39;s running to</span>
+    <span class="c1"># Go to the end of the file and write information about the session</span>
+    <span class="c1"># starting.</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+    <span class="n">logFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>\
+                   <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">logfile.plg&quot;</span><span class="p">])</span> <span class="p">),</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+
+    <span class="n">logFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">logFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;Starting session on&quot;</span><span class="p">,</span>\
+                           <span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span> <span class="n">localtime</span><span class="p">()),</span>\
+                           <span class="s2">&quot;With companyList:&quot;</span><span class="p">,</span> <span class="n">companyListFile</span><span class="p">,</span> \
+                           <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ID: &quot;</span><span class="p">,</span> <span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">%H%M%S&quot;</span><span class="p">,</span> <span class="n">localtime</span><span class="p">()),</span> 
+                           <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Settings: KeyWords:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">keyWordList</span><span class="p">),</span> 
+                           <span class="s2">&quot;; infos:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">infoList</span><span class="p">),</span> 
+                           <span class="s2">&quot;; save file:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">saveName</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">]))</span>
+    
+    <span class="c1"># If the save file&#39;s name is not given in the parameters,</span>
+    <span class="c1"># ask for it with a file dialogue (slower, but more control)</span>
+    <span class="k">if</span> <span class="n">saveName</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">savefile</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">asksaveasfile</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">defaultextension</span><span class="o">=</span><span class="s2">&quot;.csv&quot;</span><span class="p">)</span>
+        
+    <span class="c1"># If set to AUTO, just add &#39;_Result&#39; to end of the filename</span>
+    <span class="c1"># to create the path for saving the results. Piece of cake.</span>
+    <span class="k">elif</span> <span class="n">saveName</span> <span class="o">==</span> <span class="s2">&quot;AUTO&quot;</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">companyListFile</span><span class="p">)</span>
+        <span class="n">savefilename</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">companyListFile</span><span class="p">),</span>\
+                                <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>\
+                                <span class="s2">&quot;_Results.csv&quot;</span><span class="p">])</span>
+        <span class="n">savefile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">savefilename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-32&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">savefile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">saveName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-32&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Write the first row to the save file (categories/headers)</span>
+    <span class="n">savefile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;Company;Found Wiki page&quot;</span><span class="p">]</span><span class="o">+</span><span class="n">infoList</span><span class="o">+</span><span class="p">[</span><span class="s2">&quot;KeyWords</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]))</span>
+    
+    <span class="c1"># Count the size of the file to initiate the progress bar</span>
+    <span class="n">lineCountTotal</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">companyListFile</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total amount of companies to go through:&quot;</span><span class="p">,</span> <span class="n">lineCountTotal</span><span class="p">)</span>
+    <span class="n">logFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Total amount of companies to go through:&quot;</span><span class="p">,</span> <span class="n">lineCountTotal</span><span class="p">)</span>
+    
+    <span class="c1"># Open the file containing the company names</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">companyListFile</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvFile</span><span class="p">:</span>
+    
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="n">lineNo</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">missed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># Go through the companies (the main thing!)</span>
+        <span class="c1"># a line on the file represents one company</span>
+        <span class="c1"># thus the naming</span>
+        <span class="k">for</span> <span class="n">company</span> <span class="ow">in</span> <span class="n">csvFile</span><span class="p">:</span>
+            <span class="n">lineNo</span> <span class="o">=</span> <span class="n">lineNo</span> <span class="o">+</span> <span class="mi">1</span>
+            
+            <span class="c1"># Update the progress bar:</span>
+            <span class="n">progressBar</span><span class="p">(</span><span class="n">lineNo</span><span class="p">,</span> <span class="n">lineCountTotal</span><span class="p">,</span> <span class="n">elapsedTime</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start_time</span><span class="p">))</span>
+
+            <span class="c1"># Searching the company from Wikipedia. Skip the company if </span>
+            <span class="c1"># it or close matches are not found (auto_suggest=True):</span>
+            <span class="n">savefile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">company</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="s1">&#39;;&#39;</span><span class="p">]))</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">wp</span> <span class="o">=</span> <span class="n">wiki</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">company</span><span class="p">,</span> <span class="n">auto_suggest</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">savefile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">wp</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="s1">&#39;;&#39;</span><span class="p">]))</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">savefile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;404 not found&#39;</span><span class="p">,</span> <span class="s1">&#39;;&#39;</span><span class="p">]))</span>
+                <span class="n">missed</span> <span class="o">=</span> <span class="n">missed</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">continue</span>
+            
+            <span class="c1"># Create BeautifulSoup for html scraping</span>
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">wp</span><span class="o">.</span><span class="n">html</span><span class="p">(),</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># If company is found from Wikipedia, search</span>
+            <span class="c1"># for information about the company and so on.</span>
+            <span class="k">for</span> <span class="n">wi</span> <span class="ow">in</span> <span class="n">infoList</span><span class="p">:</span>
+                <span class="n">info</span> <span class="o">=</span> <span class="n">wsf</span><span class="o">.</span><span class="n">searchForCompanyInfo</span><span class="p">(</span><span class="n">soup</span><span class="p">,</span> <span class="n">wi</span><span class="p">)</span>
+                <span class="n">savefile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">info</span><span class="p">))</span>
+                <span class="n">savefile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+                
+            <span class="c1"># Also search for the keywords given in parameters. </span>
+            <span class="c1"># Define the industry of the company based on them:               </span>
+            <span class="n">foundKeyWords</span> <span class="o">=</span> <span class="n">wsf</span><span class="o">.</span><span class="n">searchForKeyWords</span><span class="p">(</span><span class="n">soup</span><span class="p">,</span> <span class="n">keyWordList</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">foundKeyWords</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">savefile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">foundKeyWords</span><span class="p">))</span>
+                    
+    <span class="c1"># Close the files and exit the function         </span>
+    <span class="n">progressBar</span><span class="p">(</span><span class="n">lineCountTotal</span><span class="p">,</span> <span class="n">lineCountTotal</span><span class="p">)</span> 
+    <span class="n">savefile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">csvFile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; -   DONE! With success rate of: </span><span class="si">{0:.2f}</span><span class="s1">%        &#39;</span><span class="p">,</span>\
+          <span class="p">((</span><span class="n">lineCountTotal</span><span class="o">-</span><span class="n">missed</span><span class="p">)</span><span class="o">/</span><span class="n">lineCountTotal</span><span class="p">))</span></div>
+    
+    
+<span class="sd">&#39;&#39;&#39; ======================== Main function for testing =====================&#39;&#39;&#39;</span>
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    
+    <span class="c1"># Ignore the annoying, mystery error of beautifulSoup</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting something almost horrible:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Started at:&quot;</span><span class="p">,</span> <span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span> <span class="n">localtime</span><span class="p">()))</span>
+    
+    <span class="c1"># These could be deleted with small changes in the function above...</span>
+    <span class="n">searchIndustryServices</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">search4KeyWords</span> <span class="o">=</span> <span class="kc">True</span>
+    
+    <span class="c1"># keywords and info to scrape from Wikipedia:</span>
+    <span class="n">keywordList</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;comminut&quot;</span><span class="p">,</span> <span class="s2">&quot;dewater&quot;</span><span class="p">,</span> <span class="s2">&quot;flotat&quot;</span><span class="p">,</span> <span class="s2">&quot;beneficiat&quot;</span><span class="p">,</span> \
+                   <span class="s2">&quot;metallurg&quot;</span><span class="p">,</span><span class="s2">&quot;concentrat&quot;</span><span class="p">,</span> <span class="s2">&quot;tank&quot;</span><span class="p">,</span> <span class="s2">&quot;smelt&quot;</span><span class="p">,</span> \
+                   <span class="s2">&quot;mineral&quot;</span><span class="p">,</span> <span class="s2">&quot;processing&quot;</span><span class="p">,</span> <span class="s2">&quot;mining&quot;</span><span class="p">,</span> <span class="s2">&quot;automation&quot;</span><span class="p">]</span>
+    
+    <span class="n">companyInfoList</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Industry&quot;</span><span class="p">,</span> <span class="s2">&quot;Services&quot;</span><span class="p">]</span>
+
+
+    <span class="c1"># Files to handle:</span>
+    <span class="n">companyListFiles</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;..</span><span class="se">\\</span><span class="s2">AllOfThecompanies.csv&quot;</span><span class="p">]</span>
+
+    
+    <span class="k">for</span> <span class="n">compListFile</span> <span class="ow">in</span> <span class="n">companyListFiles</span><span class="p">:</span>
+        
+        <span class="c1"># Start handling a new file:</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Starting with file:&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">compListFile</span><span class="p">),</span>\
+               <span class="s2">&quot;at&quot;</span><span class="p">,</span> <span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span> <span class="n">localtime</span><span class="p">()))</span>
+        
+        <span class="c1"># Do the real magic. For over-night runs a try-except</span>
+        <span class="c1"># model was implemented. This way miscellaneous crashes</span>
+        <span class="c1"># will not affect the whole run and log is preserved:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">companyInfoFromCSV</span><span class="p">(</span><span class="n">compListFile</span><span class="p">,</span> <span class="n">keywordList</span><span class="p">,</span> \
+                               <span class="n">companyInfoList</span><span class="p">,</span>\
+                               <span class="n">saveName</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">compListFile</span><span class="p">,</span> <span class="s2">&quot;didn&#39;t finish properly!:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        
+        <span class="c1"># Print information on how long the executing took.</span>
+        <span class="c1"># Interesting pieces of information to add here are</span>
+        <span class="c1"># e.g. the average execute time, average change etc:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished with file:&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">compListFile</span><span class="p">),</span>\
+              <span class="s2">&quot;at&quot;</span><span class="p">,</span> <span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span> <span class="n">localtime</span><span class="p">()))</span>
+        
+        <span class="n">hours</span><span class="p">,</span> <span class="n">rem</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">((</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">start_time</span><span class="p">),</span> <span class="mi">3600</span><span class="p">)</span>
+        <span class="n">mins</span><span class="p">,</span> <span class="n">secs</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">rem</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">: </span><span class="si">{}</span><span class="s1">h </span><span class="si">{}</span><span class="s1">m </span><span class="si">{}</span><span class="s1">s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;Time spent on file&quot;</span><span class="p">,</span>\
+                                       <span class="nb">int</span><span class="p">(</span><span class="n">hours</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">mins</span><span class="p">),</span>\
+                                       <span class="nb">int</span><span class="p">(</span><span class="n">secs</span><span class="p">)))</span>
+        
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All DONE! Check the results!&quot;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Olli Riikonen.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

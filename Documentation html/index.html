@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Documentation for the Web Scraping Python project &mdash; WebScrapingTryOut 0.0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="WebScrapingTryOut 0.0.1 documentation" href="#"/>
+        <link rel="next" title="Helper Functions" href="helpfuncs.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> WebScrapingTryOut
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="helpfuncs.html">Helper Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mainfuncs.html">Main functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">WebScrapingTryOut</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Documentation for the Web Scraping Python project</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="documentation-for-the-web-scraping-python-project">
+<h1>Documentation for the Web Scraping Python project<a class="headerlink" href="#documentation-for-the-web-scraping-python-project" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="welcome-to-webscrapingtryout-s-documentation">
+<h2>Welcome to WebScrapingTryOut&#8217;s documentation!<a class="headerlink" href="#welcome-to-webscrapingtryout-s-documentation" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="contents">
+<h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="helpfuncs.html">Helper Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="helpfuncs.html#web-scraping-functions">Web scraping functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpfuncs.html#progress-bar">Progress Bar</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mainfuncs.html">Main functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mainfuncs.html#extracting-the-company-info">Extracting the company Info</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+<div class="section" id="general-information">
+<h2>General information<a class="headerlink" href="#general-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="introduction">
+<h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
+<p>This project was implemented to help working with excels consisting of copious amounts of rows (e.g. over 10 000). <a class="footnote-reference" href="#f1" id="id1">[1]</a> Originally person would&#8217;ve had to go through all the rows one by one, using a lot of time just navigating the internet and open windows trying to find the wanted information.</p>
+</div>
+<div class="section" id="value-for-the-company-aka-savings">
+<h3>Value for the company aka savings<a class="headerlink" href="#value-for-the-company-aka-savings" title="Permalink to this headline">¶</a></h3>
+<p>With the first file that was ran through this program, a following estimate of saved workhours was created:</p>
+<p>With the following assumptions:
+#. Looking up a company and its field of work takes an estimated average of 2min of work. (i.e. the time required for one row of the excel)
+#. The file had 13 000 rows to go through
+#. 4500 of them were identifiable as unique with <strong>simple</strong> filtering</p>
+<dl class="docutils">
+<dt>We can calculate the <em>working hours</em> needed for going through the excel::</dt>
+<dd><p class="first"># Without filtering the rows first:
+&gt;&gt;&gt; workingHours = 2*13000/60
+workingHours ~ 433 # Hours</p>
+<p class="last"># With filtering the rows first:
+&gt;&gt;&gt; workingHours = 2*4500/60
+workingHours ~ 150 # Hours</p>
+</dd>
+</dl>
+<p>For the first run, we spliced the list into five smaller lists to ensure redundancy and reduce running time should something go wrong with one of the lists. The following statistics were gathered from the runs:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="20%" />
+<col width="26%" />
+<col width="42%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Run</th>
+<th class="head">Item Count</th>
+<th class="head">Runtime (min)</th>
+<th class="head">Average time/item (s)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>list 1</td>
+<td>1159</td>
+<td>41</td>
+<td>2.12</td>
+</tr>
+<tr class="row-odd"><td>list 2</td>
+<td>622</td>
+<td>23</td>
+<td>2.22</td>
+</tr>
+<tr class="row-even"><td>list 3</td>
+<td>1013</td>
+<td>34</td>
+<td>2.01</td>
+</tr>
+<tr class="row-odd"><td>list 4</td>
+<td>797</td>
+<td>26</td>
+<td>1.96</td>
+</tr>
+<tr class="row-even"><td>list 5</td>
+<td>642</td>
+<td>19</td>
+<td>1.78</td>
+</tr>
+<tr class="row-odd"><td>Total:</td>
+<td>4233</td>
+<td>143</td>
+<td>2.03</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>From these statistics, we can clearly see the benefit of using the program. With using the average time spent on each row (<strong>2.03s</strong>) we get the following as the <em>working hours</em>::</dt>
+<dd><p class="first"># Without filtering the rows first:
+&gt;&gt;&gt; workingHours = 2.03*13000/60/60
+workingHours ~ 7 # Hours</p>
+<p class="last"># With filtering the rows first:
+&gt;&gt;&gt; workingHours = 2.03*4500/60/60
+workingHours ~ 2.5 # Hours</p>
+</dd>
+</dl>
+<div class="section" id="conclusions">
+<h4>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h4>
+<p>Thus calculated, we can state that using the program, one can save up to <strong>150h</strong> of man work hours! Although this seems staggering, we must confess that the program isn&#8217;t perfect. many of the companies don&#8217;t have a <em>Wikipedia</em> page, which leads to false results. <strong>However</strong>, it is to be noted that the program still finds a pager for 48% of the companies that were in the original list. using this, we can deduce the <em>saved hours</em> to be, even with added time to go through the list once to check the rest, at around <strong>70h</strong>!</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>The first file was a excel table consisting of 13 000 rows, including information about different companies. The initial task was to find out the field of industry for each company.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="helpfuncs.html" class="btn btn-neutral float-right" title="Helper Functions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Olli Riikonen.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

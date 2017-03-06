@@ -1,0 +1,93 @@
+Documentation for the Web Scraping Python project
+*************************************************
+
+.. WebScrapingTryOut documentation master file, created by
+   sphinx-quickstart on Thu Feb 11 14:36:50 2016.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to WebScrapingTryOut's documentation!
+=============================================
+
+Contents:
+=========
+
+.. toctree::
+   :maxdepth: 2
+
+   helpfuncs
+   mainfuncs
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
+
+General information
+===================
+
+Introduction
+------------
+This project was implemented to help working with excels consisting of copious amounts of rows (e.g. over 10 000). [#f1]_ Originally person would've had to go through all the rows one by one, using a lot of time just navigating the internet and open windows trying to find the wanted information. 
+
+Value for the company aka savings
+---------------------------------
+With the first file that was ran through this program, a following estimate of saved workhours was created:
+
+With the following assumptions:
+#. Looking up a company and its field of work takes an estimated average of 2min of work. (i.e. the time required for one row of the excel)
+#. The file had 13 000 rows to go through
+#. 4500 of them were identifiable as unique with **simple** filtering
+
+
+We can calculate the *working hours* needed for going through the excel::
+	# Without filtering the rows first:
+	>>> workingHours = 2*13000/60
+	workingHours ~ 433 # Hours
+
+	# With filtering the rows first:
+	>>> workingHours = 2*4500/60
+	workingHours ~ 150 # Hours
+
+
+For the first run, we spliced the list into five smaller lists to ensure redundancy and reduce running time should something go wrong with one of the lists. The following statistics were gathered from the runs:
+	
+======  ==========  =============  =====================
+Run     Item Count  Runtime (min)  Average time/item (s)
+======  ==========  =============  =====================
+list 1  1159	    41	    	   2.12
+list 2  622	    23	    	   2.22
+list 3  1013	    34	    	   2.01
+list 4  797	    26	    	   1.96
+list 5  642	    19	    	   1.78
+------  ----------  -------------  ---------------------
+Total:   4233	    143	    	   2.03
+======  ==========  =============  =====================
+
+
+From these statistics, we can clearly see the benefit of using the program. With using the average time spent on each row (**2.03s**) we get the following as the *working hours*::
+	# Without filtering the rows first:
+	>>> workingHours = 2.03*13000/60/60
+	workingHours ~ 7 # Hours
+
+	# With filtering the rows first:
+	>>> workingHours = 2.03*4500/60/60
+	workingHours ~ 2.5 # Hours
+
+Conclusions
++++++++++++
+
+Thus calculated, we can state that using the program, one can save up to **150h** of man work hours! Although this seems staggering, we must confess that the program isn't perfect. many of the companies don't have a *Wikipedia* page, which leads to false results. **However**, it is to be noted that the program still finds a pager for 48% of the companies that were in the original list. using this, we can deduce the *saved hours* to be, even with added time to go through the list once to check the rest, at around **70h**!
+
+.. rubric:: Footnotes
+
+.. [#f1] The first file was a excel table consisting of 13 000 rows, including information about different companies. The initial task was to find out the field of industry for each company.
+
+
+
+
+
